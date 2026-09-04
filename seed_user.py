@@ -13,6 +13,11 @@ DATABASE_URL = f"postgresql://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRE
 engine = create_engine(DATABASE_URL)
 
 with Session(engine) as session:
+    admin = User(
+        email="admin@test.com",
+        hashed_password=hash_password("password123"),
+        role=UserRole.admin,
+    )
     approver = User(
         email="approver@test.com",
         hashed_password=hash_password("password123"),
@@ -24,8 +29,8 @@ with Session(engine) as session:
         hashed_password=hash_password("password123"),
         role=UserRole.member,
     )
-    session.add(approver)
-    session.add(member)
+    session.add_all([admin, approver, member])
     session.commit()
+    print(f"Created admin: {admin.email}")
     print(f"Created approver: {approver.email} with limit {approver.approval_limit}")
     print(f"Created member: {member.email}")
