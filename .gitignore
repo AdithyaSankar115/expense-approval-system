@@ -1,0 +1,18 @@
+#Prevents local secrets from ever being commited to version control
+.env
+# Prevents local secrets from ever being committed to version control
+.env
+
+# Python virtual environment - large, machine-specific, easily recreated via pip install
+venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Node dependencies - large, easily recreated via npm install
+frontend/node_modules/
+
+# Editor/OS clutter
+.vscode/
+.DS_Store
